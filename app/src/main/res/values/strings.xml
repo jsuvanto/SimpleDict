@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">SimpleDict</string>
+    <string name="word">Word</string>
+    <string name="language">Language</string>
+    <string name="translation">Translation</string>
+    <string name="add_word">Add word</string>
+    <string name="delete">Delete first</string>
+    
+    <string-array name="wordclasses">
+        <item>noun</item>
+        <item>verb</item>
+        <item>adjective</item>
+        <item>adverb</item>
+        <item>pronoun</item>
+        <item>preposition</item>
+        <item>conjunction</item>
+        <item>interjection</item>
+        <item>article</item>
+    </string-array>
+
+    <string name="not_added">Empty fields; word not added.</string>
+
+</resources>
