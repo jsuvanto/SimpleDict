@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_translation;
     private Spinner sp_class;
     private RecyclerView recyclerView;
+    private WordListAdapter wordListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.rv_words);
-        final WordListAdapter wordListAdapter = new WordListAdapter(this);
+        wordListAdapter = new WordListAdapter(this);
         recyclerView.setAdapter(wordListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -66,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         if (!newWord.isEmpty() && !newWordLanguage.isEmpty() && !newWordTranslation.isEmpty()) {
             Word word = new Word(newWord, newWordLanguage, newWordClass, newWordTranslation);
             wordViewModel.insert(word);
+
+            et_word.setText("");
+            et_language.setText("");
+            et_translation.setText("");
+
         } else {
             Toast.makeText(this, R.string.not_added, Toast.LENGTH_SHORT).show();
 
@@ -73,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void deleteWord(View view) {
-
-        
-
+        Word word = wordListAdapter.getFirstItem();
+        wordViewModel.delete(word);
     }
-
 }

@@ -66,4 +66,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             return mWords.size();
         else return 0;
     }
+
+    public Word getFirstItem() {
+        return mWords.get(0);
+    }
 }

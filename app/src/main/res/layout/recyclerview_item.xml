@@ -34,8 +34,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-
-
         <TextView
             android:id="@+id/tv_translation"
             android:layout_width="wrap_content"
