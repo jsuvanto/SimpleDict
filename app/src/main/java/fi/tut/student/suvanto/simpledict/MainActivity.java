@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -55,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int index = viewHolder.getLayoutPosition();
+                Word word = wordListAdapter.getItem(index);
+                wordViewModel.delete(word);
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
     public void addWord(View view) {
@@ -80,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void deleteWord(View view) {
         if (wordListAdapter.getItemCount() > 0) {
-            Word word = wordListAdapter.getFirstItem();
+            Word word = wordListAdapter.getItem(0);
             wordViewModel.delete(word);
         }
     }

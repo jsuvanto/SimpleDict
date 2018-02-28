@@ -20,4 +20,6 @@
 
     <string name="not_added">Empty fields; word not added.</string>
 
+    <string name="no_word">Error: No word.</string>
+
 </resources>

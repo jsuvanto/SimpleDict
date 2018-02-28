@@ -1,6 +1,7 @@
 package fi.tut.student.suvanto.simpledict;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by JSuvanto on 19.2.2018.
+/** Adapter for populating the dictionary contents in the recycler view.
+ *
  */
-
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
     class WordViewHolder extends RecyclerView.ViewHolder {
@@ -49,9 +49,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             holder.tvLang.setText(String.format("%s:", current.getLanguage()));
             holder.tvClass.setText(current.getWordClass());
             holder.tvTrans.setText(String.format("\"%s\"", current.getTranslation()));
-        } else {
-            // Covers the case of data not being ready yet.
-            holder.tvWord.setText("No Word");
         }
     }
 
@@ -67,7 +64,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         else return 0;
     }
 
-    public Word getFirstItem() {
-        return mWords.get(0);
+    Word getItem(int i) {
+        return mWords.get(i);
     }
 }
