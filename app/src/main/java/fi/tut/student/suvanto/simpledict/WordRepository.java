@@ -35,9 +35,7 @@ public class WordRepository {
 
 
     private static class insertAsyncTask extends AsyncTask<Word, Void, Void> {
-
         private WordDao mAsyncTaskDao;
-
         insertAsyncTask(WordDao dao) {
             mAsyncTaskDao = dao;
         }
@@ -47,13 +45,10 @@ public class WordRepository {
             mAsyncTaskDao.insert(params[0]);
             return null;
         }
-
     }
 
     private static class deleteAsyncTask extends AsyncTask<Word, Void, Void> {
-
         private WordDao mAsyncTaskDao;
-
         deleteAsyncTask(WordDao dao) {
             mAsyncTaskDao = dao;
         }

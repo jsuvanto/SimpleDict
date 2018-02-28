@@ -26,4 +26,12 @@ public interface WordDao {
 
     @Query("SELECT * FROM words ORDER BY word ASC")
     LiveData<List<Word>> getAllWords();
+
+    @Query("SELECT * FROM words WHERE language IS :language ORDER BY word ASC")
+    LiveData<List<Word>> getWordsByLanguage(String language);
+
+    @Query("SELECT * FROM words ORDER BY :order ASC")
+    LiveData<List<Word>> getOrderedWords(String order);
+
+
 }

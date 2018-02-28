@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void deleteWord(View view) {
-        Word word = wordListAdapter.getFirstItem();
-        wordViewModel.delete(word);
+        if (wordListAdapter.getItemCount() > 0) {
+            Word word = wordListAdapter.getFirstItem();
+            wordViewModel.delete(word);
+        }
     }
 }
