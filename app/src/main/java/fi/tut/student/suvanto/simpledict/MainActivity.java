@@ -16,13 +16,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.List;
-import java.util.zip.Inflater;
+
+/** Main activity for the program.
+ *
+ * Shows the current database contents, as well as fields and buttons to add words, and a button to
+ * delete the first word.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
-
     private WordViewModel wordViewModel;
-
     private EditText et_word;
     private EditText et_language;
     private EditText et_translation;
@@ -40,16 +43,18 @@ public class MainActivity extends AppCompatActivity {
         et_translation = findViewById(R.id.et_translation);
         sp_class = findViewById(R.id.sp_class);
 
+        // Populate the spinner.
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.wordclasses, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_class.setAdapter(spinnerAdapter);
 
-
+        // Populate the recycler view.
         recyclerView = findViewById(R.id.rv_words);
         wordListAdapter = new WordListAdapter(this);
         recyclerView.setAdapter(wordListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Link the view model to the recycler view.
         wordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
         wordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
             @Override
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Delete words from database when swiping them right.
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -71,12 +77,16 @@ public class MainActivity extends AppCompatActivity {
                 wordViewModel.delete(word);
             }
         };
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
     }
 
+    /** Creates the main menu.
+     *
+     * @param menu The menu.
+     * @return Propagate call to parent.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -85,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /** Add a word to the database.
+     *
+     * @param view The current view.
+     */
     public void addWord(View view) {
 
         String newWord = et_word.getText().toString();
@@ -106,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /** Remove the first word from the database.
+     *
+     * @param view The current view.
+     */
     public void deleteWord(View view) {
         if (wordListAdapter.getItemCount() > 0) {
             Word word = wordListAdapter.getItem(0);

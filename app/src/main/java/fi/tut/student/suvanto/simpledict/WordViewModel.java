@@ -6,8 +6,7 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-/**
- * Created by JSuvanto on 19.2.2018.
+/** A view model for remembering the words to display.
  */
 
 public class WordViewModel extends AndroidViewModel {
@@ -20,14 +19,26 @@ public class WordViewModel extends AndroidViewModel {
         mAllWords = mRepository.getAllWords();
     }
 
+    /** Gets all the words in the view model.
+     *
+     * @return All the words.
+     */
     public LiveData<List<Word>> getAllWords() {
         return mAllWords;
     }
 
+    /** Adds a new word to the database through the local repository.
+     *
+     * @param word The word.
+     */
     public void insert(Word word) {
         mRepository.insert(word);
     }
 
+    /** Removes a word from the database through the local repository.
+     *
+     * @param word The word.
+     */
     public void delete(Word word) {
         mRepository.delete(word);
     }

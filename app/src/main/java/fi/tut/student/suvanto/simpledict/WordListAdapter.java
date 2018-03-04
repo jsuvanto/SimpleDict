@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.List;
 
 /** Adapter for populating the dictionary contents in the recycler view.
- *
  */
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
@@ -52,11 +51,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
-    void setWords(List<Word> words){
-        mWords = words;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getItemCount() {
         if (mWords != null)
@@ -64,6 +58,20 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         else return 0;
     }
 
+    /** Sets words to display.
+     *
+     * @param words The words.
+     */
+    void setWords(List<Word> words){
+        mWords = words;
+        notifyDataSetChanged();
+    }
+
+    /** Gets the word based on its index.
+     *
+     * @param i Index of the word in the adapter.
+     * @return The word object.
+     */
     Word getItem(int i) {
         return mWords.get(i);
     }

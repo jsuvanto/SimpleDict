@@ -5,26 +5,28 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-/**
- * Created by JSuvanto on 19.2.2018.
- */
+/** A class for words to use in a Room database. */
 
 @Entity(tableName="words")
 public class Word {
 
+    /** The word. */
     @NonNull
     @ColumnInfo(name="word")
     @PrimaryKey
     private String mWord;
 
+    /** Language of the word. */
     @NonNull
     @ColumnInfo(name="language")
     private String mLanguage;
 
+    /** Word class of the word. */
     @NonNull
     @ColumnInfo(name="wordClass")
     private String mWordClass;
 
+    /** Translation of the word. */
     @NonNull
     @ColumnInfo(name="translation")
     private String mTranslation;
